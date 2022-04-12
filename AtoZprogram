@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<pthread.h>
+#include<unistd.h>
+char ch=65;//global variable
+void* thread1(void*p) //function defination and declaretion.return type is void
+{
+while(ch>=65&&ch<=90) //print A to Z logic
+{
+printf("%c",ch);
+sleep(1);
+}
+}
+void* thread2(void*p)
+{
+while(ch<=90) //print a to z
+{
+printf("%c",ch+32);
+ch++;
+sleep(1);
+}
+}
+
+int main()
+{
+
+pthread_t a,b; //pthread_t is an macro it is used to create variables
+pthread_create(&a,0,thread1,0);//(address,attributes,functioncall,string)
+pthread_create(&b,0,thread2,0);
+pthread_join(a,0);//to run the terminate process we use threadjoin
+pthread_join(b,0);
+return 0;
+}
