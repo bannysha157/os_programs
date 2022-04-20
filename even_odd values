@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<pthread.h>
+#include<unistd.h>
+int i=1;//global variable
+
+void* even(void*p) //function defination and declaretion.return type is void
+{
+while(1)
+{
+if(i%2==0)
+
+printf("%d is even\n",i++);
+sleep(1);
+}
+}
+void* odd(void*p)
+{
+
+while(1) //print a to z
+{
+if((i%2)!=0)
+printf("%d is odd\n",i++);
+sleep(1);
+}
+}
+
+int main()
+{
+
+pthread_t a,b; //pthread_t is an macro it is used to create variables
+pthread_create(&a,0,even,0);//(address,attributes,functioncall,string)
+pthread_create(&b,0,odd,0);
+pthread_join(a,0);//to run the terminate process we use threadjoin
+pthread_join(b,0);
+return 0;
+}
